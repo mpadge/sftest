@@ -1,0 +1,15 @@
+Package: sftest
+Title: What the Package Does 
+Version: 0.0.0
+Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+Description: What the package does (one paragraph).
+Depends:
+    R (>= 3.0.0)
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Depends:
+    sf
+Suggests:
+    testthat
+RoxygenNote: 5.0.1
