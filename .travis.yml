@@ -14,16 +14,14 @@ matrix:
               - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
               - sudo apt-get --yes --force-yes update -qq
               - sudo apt-get install --yes libproj-dev libgeos-dev libgdal-dev libudunits2-dev
-          #r_build_args: '--no-build-vignettes'
-          #r_check_args: '--ignore-vignettes'
-        - os: linux
-          r: release
-          dist: precise # 12.04
-          before_install:
-              - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
-              - sudo apt-get --yes --force-yes update -qq
-              - sudo apt-get install --yes libhdf5-serial-dev
-              - sudo apt-get install --yes libproj-dev libgeos-dev libgdal-dev libudunits2-dev
+        # precise fails because unmet deps in libgdal-dev can not be insalled
+        #- os: linux
+        #  r: release
+        #  dist: precise # 12.04
+        #  before_install:
+        #      - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
+        #      - sudo apt-get --yes --force-yes update -qq
+        #      - sudo apt-get install --yes libproj-dev libgeos-dev libgdal-dev libudunits2-dev
         - os: linux
           r: devel
           dist: trusty
@@ -31,16 +29,27 @@ matrix:
               - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
               - sudo apt-get --yes --force-yes update -qq
               - sudo apt-get install --yes libproj-dev libgeos-dev libgdal-dev libudunits2-dev
-          r_build_args: '--no-build-vignettes'
-          r_check_args: '--ignore-vignettes'
+        - os: linux
+          r: release
+          dist: trusty
+          r_binary_packages:
+              sf
+        - os: linux
+          r: release
+          dist: precise
+          r_binary_packages:
+              sf
+        - os: osx
+          r: release
+        - os: osx
+          r: release
+          brew_packages: gdal # brew gdal is 1.11.5
         - os: osx
           r: release
           # http://gis.stackexchange.com/questions/155403/installing-gdal-on-macosx
           before_install:
               - brew tap osgeo/osgeo4mac
           brew_packages: gdal-20
-          r_build_args: '--no-build-vignettes'
-          r_check_args: '--ignore-vignettes'
 
 
 notifications:
