@@ -36,8 +36,8 @@ matrix:
         - os: osx
           r: release
           # http://gis.stackexchange.com/questions/155403/installing-gdal-on-macosx
-          #before_install:
-          #    - brew tap osgeo/osgeo4mac
+          before_install:
+              - brew tap osgeo/osgeo4mac
           brew_packages: gdal-20
           r_build_args: '--no-build-vignettes'
           r_check_args: '--ignore-vignettes'
