@@ -4,3 +4,6 @@
 
 # sftest 
 
+Skeleton to test
+[`.travis.yml`](https://github.com/mpadge/sftest/blob/master/.travis.yml) for `R` package dependency on 
+[`sf`](https://github.com/edzer/sfr).
