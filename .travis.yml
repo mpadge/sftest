@@ -1,5 +1,60 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+language: r
+warnings_are_errors: true
+sudo: required
 
-language: R
-sudo: false
-cache: packages
+matrix:
+    allow_failures:
+        -os: osx
+    include:
+        - os: linux
+          r: release
+          dist: trusty # 14.04
+          env: R_CODECOV=true
+          before_install:
+              - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
+              - sudo apt-get --yes --force-yes update -qq
+              - sudo apt-get install --yes libproj-dev libgeos-dev libgdal-dev libudunits2-dev
+          #r_build_args: '--no-build-vignettes'
+          #r_check_args: '--ignore-vignettes'
+        - os: linux
+          r: oldrel
+          dist: precise # 12.04
+          before_install:
+              - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
+              - sudo apt-get --yes --force-yes update -qq
+              - sudo apt-get install --yes libproj-dev libgeos-dev libgdal-dev libudunits2-dev
+        - os: linux
+          r: devel
+          dist: trusty
+          before_install:
+              - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
+              - sudo apt-get --yes --force-yes update -qq
+              - sudo apt-get install --yes libproj-dev libgeos-dev libgdal-dev libudunits2-dev
+          r_build_args: '--no-build-vignettes'
+          r_check_args: '--ignore-vignettes'
+        - os: osx
+          r: release
+          brew_packages: gdal
+          r_build_args: '--no-build-vignettes'
+          r_check_args: '--ignore-vignettes'
+          #- r: oldrel
+          #env: DEPS=cran
+          #os: osx
+          #- r: devel
+          #env: DEPS=cran
+          #os: linux
+          #- r: devel
+          #env: DEPS=cran
+          #os: osx
+
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+
+r_github_packages:
+      - jimhester/covr
+
+after_success:
+      - Rscript -e 'covr::codecov()'
