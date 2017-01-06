@@ -22,9 +22,10 @@ matrix:
           r: release
           dist: trusty
           before_install:
+              - sudo add-apt-repository --yes ppa:marutter/rrutter
               - sudo add-apt-repository --yes ppa:marutter/c2d4u
               - sudo apt-get update
-          r_binary_packages: sf
+              - sudo apt-get install r-cran-sf
         # note that the default osx has pre-installed gdal version 1.11.5, yet
         # this works anyway:
         - os: osx
