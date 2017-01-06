@@ -1,6 +1,7 @@
 language: r
 warnings_are_errors: true
 sudo: required
+cache: packages
 
 matrix:
     allow_failures:
@@ -20,17 +21,13 @@ matrix:
         - os: linux
           r: release
           dist: trusty
-          before_install:
-              - sudo add-apt-repository ppa:marutter/c2d4u
-              - sudo apt-get update
+          before_install: ''
           r_binary_packages:
               sf
         - os: linux
           r: release
           dist: precise
-          before_install:
-              - sudo add-apt-repository ppa:marutter/c2d4u
-              - sudo apt-get update
+          before_install: ''
           r_binary_packages:
               sf
         # note that the default osx has pre-installed gdal version 1.11.5, yet
@@ -39,6 +36,7 @@ matrix:
           r: release
           before_install: ''
           disable_homebrew: true
+        # This stalls when installing gdal, and so fails
         - os: osx
           r: release
           before_install:
