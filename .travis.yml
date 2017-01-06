@@ -18,6 +18,13 @@ matrix:
         - os: linux
           r: devel
           dist: trusty
+        - os: linux
+          r: release
+          dist: trusty
+          before_install:
+              - sudo --yes add-apt-repository ppa:marutter/c2d4u
+              - sudo apt-get update
+          r_binary_packages: sf
         # binary_packages fail
         #- os: linux
         #  r: release
