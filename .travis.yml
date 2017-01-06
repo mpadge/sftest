@@ -18,13 +18,13 @@ matrix:
         - os: linux
           r: devel
           dist: trusty
-        # binary_packages fail
-        #- os: linux
-        #  r: release
-        #  dist: trusty
-        #  before_install: ''
-        #  r_binary_packages:
-        #      sf
+        - os: linux
+          r: release
+          dist: trusty
+          before_install:
+              - sudo add-apt-repository --yes ppa:marutter/c2d4u
+              - sudo apt-get update
+          r_binary_packages: sf
         # note that the default osx has pre-installed gdal version 1.11.5, yet
         # this works anyway:
         - os: osx
