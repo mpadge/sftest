@@ -15,4 +15,3 @@ Test sf
 \examples{
 test ()
 }
-
