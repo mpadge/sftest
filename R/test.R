@@ -10,3 +10,14 @@ test <- function() {
     class (junk) <- "sfc"
     return (junk)
 }
+
+#' test rcpp
+#'
+#' @return A vector
+#' @export
+#' @examples
+#' testrc ()
+testrc <- function ()
+{
+    rcpp_test ()
+}
